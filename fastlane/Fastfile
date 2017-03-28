@@ -1,0 +1,42 @@
+
+# Customise this file, documentation can be found here:
+# https://github.com/fastlane/fastlane/tree/master/fastlane/docs
+# All available actions: https://docs.fastlane.tools/actions
+# can also be listed using the `fastlane actions` command
+
+# Change the syntax highlighting to Ruby
+# All lines starting with a # are ignored when running `fastlane`
+
+# If you want to automatically update fastlane if a new version is available:
+# update_fastlane
+
+# Avoid to recreate the README.md in fastlane Directory
+skip_docs
+
+# This is the minimum version number required.
+# Update this, if you use features of a newer version
+fastlane_version "2.18.3"
+
+default_platform :ios
+
+
+# Fastfile actions accept additional configuration, but
+# don't worry, fastlane will prompt you for required
+# info which you can add here later
+lane :increment do
+	increment_build_number({
+  		build_number: latest_testflight_build_number + 1
+	})
+	end
+
+lane :upload do
+  	# upload to Testflight
+	pilot(skip_waiting_for_build_processing: true)
+	end
+
+
+# More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
+# All available actions: https://docs.fastlane.tools/actions
+
+# fastlane reports which actions are used
+# No personal data is recorded. Learn more at https://github.com/fastlane/enhancer
